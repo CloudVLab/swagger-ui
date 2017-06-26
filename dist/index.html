@@ -71,9 +71,12 @@
 <script src="./swagger-ui-standalone-preset.js"> </script>
 <script>
 window.onload = function() {
-  // Build a system
+  // We allow the query param to
+  const urlParams = new URLSearchParams(window.location.search);
+  const deployment = urlParams.get('deployment') || 'joshjr.qwiklab.com';
+
   const ui = SwaggerUIBundle({
-    url: "http://petstore.swagger.io/v2/swagger.json",
+    url: `http://${deployment}/api/v2/swagger_doc`,
     dom_id: '#swagger-ui',
     presets: [
       SwaggerUIBundle.presets.apis,
@@ -82,10 +85,12 @@ window.onload = function() {
     plugins: [
       SwaggerUIBundle.plugins.DownloadUrl
     ],
-    layout: "StandaloneLayout"
+    layout: "StandaloneLayout",
+    operationsSorter: 'alpha'
   })
 
   window.ui = ui
+
 }
 </script>
 </body>

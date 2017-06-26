@@ -73,9 +73,13 @@
 window.onload = function() {
   window["SwaggerUIBundle"] = window["swagger-ui-bundle"]
   window["SwaggerUIStandalonePreset"] = window["swagger-ui-standalone-preset"]
-  // Build a system
+
+  // We allow the query param to
+  const urlParams = new URLSearchParams(window.location.search);
+  const deployment = urlParams.get('deployment') || 'joshjr.qwiklab.com';
+
   const ui = SwaggerUIBundle({
-    url: "http://petstore.swagger.io/v2/swagger.json",
+    url: `http://${deployment}/api/v2/swagger_doc`,
     dom_id: '#swagger-ui',
     presets: [
       SwaggerUIBundle.presets.apis,
@@ -84,19 +88,20 @@ window.onload = function() {
     plugins: [
       SwaggerUIBundle.plugins.DownloadUrl
     ],
-    layout: "StandaloneLayout"
+    layout: "StandaloneLayout",
+    operationsSorter: 'alpha'
   })
 
   window.ui = ui
 
-  ui.initOAuth({
-    clientId: "your-client-id",
-    clientSecret: "your-client-secret-if-required",
-    realm: "your-realms",
-    appName: "your-app-name",
-    scopeSeparator: " ",
-    additionalQueryStringParams: {}
-  })
+  // ui.initOAuth({
+  //   clientId: "your-client-id",
+  //   clientSecret: "your-client-secret-if-required",
+  //   realm: "your-realms",
+  //   appName: "your-app-name",
+  //   scopeSeparator: " ",
+  //   additionalQueryStringParams: {}
+  // })
 }
 </script>
 </body>
