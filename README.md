@@ -1,3 +1,19 @@
+
+> ## Qwiklabs only
+>
+> This is the Qwiklab fork of the Swagger UI project. It has some custom styling and javascript logic for our particular documentation needs. 
+>
+> ### Deploying
+>
+> We host our docs on GCP in a Cloud Storage bucket. To deploy changes, use `gsutil` to upload compiled assets. 
+>
+> ```shell
+> npm run build
+> cd dist
+> gsutil -m cp * gs://api-docs.qwiklabs.com
+> ```
+
+
 # Swagger UI
 
 [![NPM version](https://badge.fury.io/js/swagger-ui.svg)](http://badge.fury.io/js/swagger-ui)
